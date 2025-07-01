@@ -58,7 +58,7 @@ const Header = () => {
       <header 
         ref={headerRef}
         className={`fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 flex justify-between items-center transition-all duration-300 ${
-          isScrolled ? "bg-background/90 backdrop-blur-md shadow-sm" : "bg-transparent"
+          isScrolled ? "bg-background/90" : "bg-transparent"
         }`}
       >
         <Link href="/" className="text-xl font-medium tracking-tighter">
