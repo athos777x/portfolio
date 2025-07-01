@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex flex-col items-center md:items-start">
           <Link href="/" className="text-lg font-medium tracking-tighter mb-2">
-            portfolio.
+            athos.
           </Link>
           <p className="text-sm text-foreground/60">
             © {currentYear} All rights reserved.

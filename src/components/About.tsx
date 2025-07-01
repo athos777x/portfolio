@@ -93,7 +93,7 @@ const About = () => {
           <div className="content-block">
             <h3 className="text-xl font-medium mb-4">Background</h3>
             <p className="text-foreground/70 leading-relaxed">
-              I'm a passionate designer and developer with over 5 years of experience creating digital products that solve real-world problems. My journey began with a curiosity about how things work, which led me to explore the intersection of design and technology.
+              Hello, I'm Athrian "Athos" Judd Pahang, an aspiring front-end developer and a fresh graduate with a strong foundation in design and development. My journey began with a curiosity about how things work, which led me to pursue a degree in IT where I discovered my love for creating digital solutions that solve real-world problems.
             </p>
           </div>
 
@@ -112,9 +112,9 @@ const About = () => {
               <li>TypeScript</li>
               <li>Tailwind CSS</li>
               <li>GSAP Animations</li>
-              <li>Responsive Design</li>
-              <li>Figma / Adobe XD</li>
-              <li>Web Performance</li>
+              <li>React Native</li>
+              <li>Figma</li>
+              <li>Flutter</li>
             </ul>
           </div>
 

@@ -62,7 +62,7 @@ const Header = () => {
         }`}
       >
         <Link href="/" className="text-xl font-medium tracking-tighter">
-          portfolio.
+          athos.
         </Link>
         
         <nav ref={navRef} className="hidden md:flex gap-8">

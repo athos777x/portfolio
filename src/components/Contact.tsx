@@ -198,8 +198,8 @@ const Contact = () => {
         <div className="mt-16 flex flex-col md:flex-row gap-8 justify-between">
           <div className="form-element">
             <h3 className="text-lg font-medium mb-2">Email</h3>
-            <a href="mailto:hello@example.com" className="text-foreground/70 hover:text-foreground transition-colors">
-              hello@example.com
+            <a href="mailto:athrian.pahang@gmail.com" className="text-foreground/70 hover:text-foreground transition-colors">
+              athrian.pahang@gmail.com
             </a>
           </div>
           
@@ -221,7 +221,7 @@ const Contact = () => {
           <div className="form-element">
             <h3 className="text-lg font-medium mb-2">Location</h3>
             <p className="text-foreground/70">
-              New York, NY
+              Bohol, Philippines
             </p>
           </div>
         </div>

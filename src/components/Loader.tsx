@@ -86,7 +86,7 @@ const Loader = ({ finishLoading }: LoaderProps) => {
     }
     
     // Create letter elements for the text animation
-    const portfolioText = "portfolio.";
+    const portfolioText = "athos.";
     const letters = portfolioText.split("");
     
     // Clear text container
@@ -186,7 +186,7 @@ const Loader = ({ finishLoading }: LoaderProps) => {
           ref={textRef}
           className="text-xl md:text-2xl font-medium tracking-tighter text-foreground"
         >
-          portfolio.
+          athos.
         </div>
       </div>
     </div>
