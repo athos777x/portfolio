@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorDotRef = useRef<HTMLDivElement>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   useEffect(() => {
     // Check if window is defined (client-side only)
@@ -16,6 +17,17 @@ const CustomCursor = () => {
     
     const cursor = cursorRef.current;
     const cursorDot = cursorDotRef.current;
+    
+    // Detect initial color scheme
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(darkModeMediaQuery.matches);
+    
+    // Listen for changes in color scheme
+    const handleColorSchemeChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches);
+    };
+    
+    darkModeMediaQuery.addEventListener('change', handleColorSchemeChange);
     
     // Hide default cursor on the body and all elements
     document.body.style.cursor = "none";
@@ -46,8 +58,8 @@ const CustomCursor = () => {
       gsap.to(cursor, {
         scale: 1.5,
         opacity: 0.8,
-        backgroundColor: "rgba(59, 130, 246, 0.2)", // Light blue background
-        borderColor: "var(--accent)",
+        backgroundColor: isDarkMode ? "rgba(237, 237, 237, 0.2)" : "rgba(23, 23, 23, 0.2)",
+        borderColor: isDarkMode ? "#ededed" : "#171717",
         duration: 0.3,
       });
     };
@@ -57,7 +69,7 @@ const CustomCursor = () => {
         scale: 1,
         opacity: 1,
         backgroundColor: "transparent",
-        borderColor: "var(--accent)",
+        borderColor: isDarkMode ? "#ededed" : "#171717",
         duration: 0.3,
       });
     };
@@ -103,25 +115,26 @@ const CustomCursor = () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.body.style.cursor = "auto";
       document.head.removeChild(styleEl);
+      darkModeMediaQuery.removeEventListener('change', handleColorSchemeChange);
       
       interactiveElements.forEach((element) => {
         element.removeEventListener("mouseenter", onElementHover);
         element.removeEventListener("mouseleave", onElementLeave);
       });
     };
-  }, []);
+  }, [isDarkMode]);
   
   return (
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-accent pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
-        style={{ borderColor: 'var(--accent)' }}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
+        style={{ borderColor: isDarkMode ? '#ededed' : '#171717' }}
       />
       <div
         ref={cursorDotRef}
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-accent pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
-        style={{ backgroundColor: 'var(--accent)' }}
+        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2"
+        style={{ backgroundColor: isDarkMode ? '#ededed' : '#171717' }}
       />
     </>
   );
