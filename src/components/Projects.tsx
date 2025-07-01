@@ -47,14 +47,26 @@ const Projects = () => {
   const projectsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Set initial states for elements to prevent flash
+    if (headingRef.current) {
+      gsap.set(headingRef.current, { opacity: 0, x: -50 });
+    }
+    
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+      gsap.set(card, { opacity: 0, y: 50 });
+    });
+    
     // Ensure ScrollTrigger is loaded
     if (typeof window !== "undefined") {
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+        // Make sure to refresh ScrollTrigger to pick up new elements
+        ScrollTrigger.refresh();
+        
         const ctx = gsap.context(() => {
           // Animate heading
-          gsap.fromTo(
+          gsap.to(
             headingRef.current,
-            { opacity: 0, x: -50 },
             {
               opacity: 1,
               x: 0,
@@ -69,9 +81,8 @@ const Projects = () => {
           );
 
           // Animate project cards
-          gsap.fromTo(
+          gsap.to(
             ".project-card",
-            { opacity: 0, y: 50 },
             {
               opacity: 1,
               y: 0,

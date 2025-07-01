@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 // Register ScrollTrigger plugin
@@ -17,32 +17,53 @@ const Hero = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const [isAnimationReady, setIsAnimationReady] = useState(false);
 
+  // Set initial states for elements to prevent flash of unstyled content
   useEffect(() => {
+    if (titleRef.current) {
+      gsap.set(titleRef.current, { opacity: 0, y: 30 });
+    }
+    if (subtitleRef.current) {
+      gsap.set(subtitleRef.current, { opacity: 0 });
+    }
+    if (scrollIndicatorRef.current) {
+      gsap.set(scrollIndicatorRef.current, { opacity: 0, y: -10 });
+    }
+    
+    // Mark animation as ready after a brief delay
+    const timer = setTimeout(() => {
+      setIsAnimationReady(true);
+    }, 50);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Run animations once elements are ready
+  useEffect(() => {
+    if (!isAnimationReady) return;
+    
     const ctx = gsap.context(() => {
       // Animate title
-      gsap.fromTo(
+      gsap.to(
         titleRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.5 }
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }
       );
 
       // Animate subtitle
-      gsap.fromTo(
+      gsap.to(
         subtitleRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1, ease: "power2.out", delay: 1 }
+        { opacity: 1, duration: 1, ease: "power2.out", delay: 0.7 }
       );
 
       // Animate scroll indicator
-      gsap.fromTo(
+      gsap.to(
         scrollIndicatorRef.current,
-        { opacity: 0, y: -10 },
         { 
           opacity: 1, 
           y: 0, 
           duration: 1,
-          delay: 1.5,
+          delay: 1.2,
           ease: "power2.out",
           yoyo: true,
           repeat: -1,
@@ -52,7 +73,7 @@ const Hero = () => {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [isAnimationReady]);
 
   return (
     <section 

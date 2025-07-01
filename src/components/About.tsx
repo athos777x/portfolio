@@ -18,14 +18,26 @@ const About = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Set initial states for elements to prevent flash
+    if (headingRef.current) {
+      gsap.set(headingRef.current, { opacity: 0, x: -50 });
+    }
+    
+    const contentBlocks = document.querySelectorAll('.content-block');
+    contentBlocks.forEach(block => {
+      gsap.set(block, { opacity: 0, y: 30 });
+    });
+    
     // Ensure ScrollTrigger is loaded
     if (typeof window !== "undefined") {
       import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+        // Make sure to refresh ScrollTrigger to pick up new elements
+        ScrollTrigger.refresh();
+        
         const ctx = gsap.context(() => {
           // Animate heading on scroll
-          gsap.fromTo(
+          gsap.to(
             headingRef.current,
-            { opacity: 0, x: -50 },
             {
               opacity: 1,
               x: 0,
@@ -40,9 +52,8 @@ const About = () => {
           );
 
           // Animate content blocks with stagger
-          gsap.fromTo(
+          gsap.to(
             ".content-block",
-            { opacity: 0, y: 30 },
             {
               opacity: 1,
               y: 0,
