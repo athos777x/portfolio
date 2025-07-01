@@ -8,6 +8,10 @@ const CustomCursor = () => {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    // Check if window is defined (client-side only)
+    if (typeof window === 'undefined') return;
+    
+    // Check if cursor refs are available
     if (!cursorRef.current || !cursorDotRef.current) return;
     
     const cursor = cursorRef.current;

@@ -26,6 +26,7 @@ const About = dynamic(() => import("@/components/About"), { ssr: false });
 const Projects = dynamic(() => import("@/components/Projects"), { ssr: false });
 const Contact = dynamic(() => import("@/components/Contact"), { ssr: false });
 const Loader = dynamic(() => import("@/components/Loader"), { ssr: false });
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
 
 export default function Home() {
   // Use useEffect to handle client-side only state
@@ -71,6 +72,7 @@ export default function Home() {
             contentVisible ? "opacity-100" : "opacity-0"
           }`}
         >
+          <CustomCursor />
           <Header />
           <main>
             <Hero />
