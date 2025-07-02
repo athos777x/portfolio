@@ -26,7 +26,7 @@ const projects = [
   {
     id: 2,
     title: "LNHS Mobile App",
-    description: "Mobile application for Lourdes National High School with qr code attendance.",
+    description: "Mobile application for Lourdes National High School with QR code attendance.",
     tags: ["React Native", "TypeScript", "Javascript", "SQL"],
     image: "/vercel.svg", // Replace with actual project image
     link: "#",
@@ -34,7 +34,7 @@ const projects = [
   {
     id: 3,
     title: "HYP App",
-    description: "A hypertension and medicine tracker app with maps integration.",
+    description: "Hypertension and medicine tracker app with maps integration.",
     tags: ["Flutter", "TypeScript", "Dart", "Firebase"],
     image: "/next.svg", // Replace with actual project image
     link: "#",
