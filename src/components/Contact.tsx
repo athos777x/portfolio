@@ -206,19 +206,19 @@ const Contact = () => {
           <div className="form-element">
             <h3 className="text-lg font-medium mb-2">Follow me</h3>
             <div className="flex gap-4">
-              <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a href="https://x.com/athrianp" className="text-foreground/70 hover:text-foreground transition-colors">
                 Twitter
               </a>
-              <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a href="https://www.linkedin.com/in/athrian-judd-pahang-08b712370/" className="text-foreground/70 hover:text-foreground transition-colors">
                 LinkedIn
               </a>
-              <a href="#" className="text-foreground/70 hover:text-foreground transition-colors">
+              <a href="https://github.com/athos777x" className="text-foreground/70 hover:text-foreground transition-colors">
                 GitHub
               </a>
             </div>
           </div>
           
-          <div className="form-element">
+          <div className="form-element">  
             <h3 className="text-lg font-medium mb-2">Location</h3>
             <p className="text-foreground/70">
               Bohol, Philippines

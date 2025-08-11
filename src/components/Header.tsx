@@ -66,7 +66,7 @@ const Header = () => {
         </Link>
         
         <nav ref={navRef} className="hidden md:flex gap-8">
-          {["about", "work", "projects", "contact"].map((item) => (
+          {["work", "about", "projects", "contact"].map((item) => (
             <Link 
               key={item}
               href={`/#${item}`} 

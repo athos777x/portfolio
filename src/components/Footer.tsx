@@ -14,18 +14,6 @@ const Footer = () => {
             © {currentYear} All rights reserved.
           </p>
         </div>
-        
-        <nav className="flex gap-6 text-sm text-foreground/60">
-          <Link href="/privacy" className="hover:text-foreground transition-colors">
-            Privacy
-          </Link>
-          <Link href="/terms" className="hover:text-foreground transition-colors">
-            Terms
-          </Link>
-          <Link href="/sitemap" className="hover:text-foreground transition-colors">
-            Sitemap
-          </Link>
-        </nav>
       </div>
     </footer>
   );
