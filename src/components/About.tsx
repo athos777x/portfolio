@@ -93,14 +93,14 @@ const About = () => {
           <div className="content-block">
             <h3 className="text-xl font-medium mb-4">Background</h3>
             <p className="text-foreground/70 leading-relaxed">
-              Hello, I'm Athrian "Athos" Judd Pahang, an aspiring front-end developer and a fresh graduate with a strong foundation in design and development. My journey began with a curiosity about how things work, which led me to pursue a degree in IT where I discovered my love for creating digital solutions that solve real-world problems.
+              Hello, I&apos;m Athrian Judd Pahang, an aspiring front-end developer and a fresh graduate with a strong foundation in design and development. My journey began with a curiosity about how things work, which led me to pursue a degree in IT where I discovered my love for creating digital solutions that solve real-world problems.
             </p>
           </div>
 
           <div className="content-block">
             <h3 className="text-xl font-medium mb-4">Approach</h3>
             <p className="text-foreground/70 leading-relaxed">
-              I believe in creating experiences that are both beautiful and functional. My process involves deep research, thoughtful design, and clean code. I'm constantly learning and adapting to new technologies while maintaining a focus on accessibility and user-centered design.
+              I believe in creating experiences that are both beautiful and functional. My process involves deep research, thoughtful design, and clean code. I&apos;m constantly learning and adapting to new technologies while maintaining a focus on accessibility and user-centered design.
             </p>
           </div>
 
@@ -121,7 +121,7 @@ const About = () => {
           <div className="content-block">
             <h3 className="text-xl font-medium mb-4">Values</h3>
             <p className="text-foreground/70 leading-relaxed">
-              I value simplicity, accessibility, and attention to detail. I believe that great design should be inclusive and that technology should enhance human experiences, not complicate them. I'm committed to creating work that makes a positive impact.
+              I value simplicity, accessibility, and attention to detail. I believe that great design should be inclusive and that technology should enhance human experiences, not complicate them. I&apos;m committed to creating work that makes a positive impact.
             </p>
           </div>
         </div>

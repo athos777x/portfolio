@@ -51,7 +51,7 @@ const Contact = () => {
   useEffect(() => {
     // Ensure ScrollTrigger is loaded
     if (typeof window !== "undefined") {
-      import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+      import("gsap/ScrollTrigger").then(() => {
         const ctx = gsap.context(() => {
           // Animate heading
           gsap.fromTo(
@@ -106,11 +106,11 @@ const Contact = () => {
           ref={headingRef}
           className="text-3xl md:text-4xl font-medium tracking-tighter mb-8"
         >
-          Let's work together
+          Let&apos;s work together
         </h2>
         
         <p className="text-foreground/70 mb-12 max-w-2xl">
-          Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+          Have a project in mind or just want to chat? Feel free to reach out. I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
         </p>
 
         {isSubmitted ? (
@@ -119,7 +119,7 @@ const Contact = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             <h3 className="text-lg font-medium mb-1">Message sent successfully!</h3>
-            <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+            <p>Thank you for reaching out. I&apos;ll get back to you as soon as possible.</p>
           </div>
         ) : (
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">

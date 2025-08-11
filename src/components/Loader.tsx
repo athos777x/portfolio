@@ -123,7 +123,7 @@ const Loader = ({ finishLoading }: LoaderProps) => {
       ease: "power2.out"
     }, "-=0.3")
     .to(dots, {
-      scale: function(i) {
+      scale: function() {
         // Random scale between 0.5 and 1.5 for a more dynamic effect
         return 0.5 + Math.random();
       },

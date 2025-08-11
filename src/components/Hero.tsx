@@ -92,7 +92,7 @@ const Hero = () => {
           ref={subtitleRef}
           className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto"
         >
-          I'm a designer & developer crafting beautiful, functional websites and applications with a focus on user experience, minimalism and modern aesthetics.
+          I&apos;m a designer & developer crafting beautiful, functional websites and applications with a focus on user experience, minimalism and modern aesthetics.
         </p>
       </div>
       
