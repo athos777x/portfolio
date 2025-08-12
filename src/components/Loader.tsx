@@ -28,7 +28,7 @@ const Loader = ({ finishLoading }: LoaderProps) => {
         // Fade out the entire loader before signaling completion
         gsap.to(loader, {
           opacity: 0,
-          duration: 0.5,
+          duration: 0.3,
           ease: "power2.inOut",
           onComplete: () => {
             // Enable scrolling
@@ -107,54 +107,54 @@ const Loader = ({ finishLoading }: LoaderProps) => {
     tl.to(dots, {
       opacity: 1,
       scale: 1,
-      duration: 0.5,
+      duration: 0.3,
       stagger: {
         grid: [rows, cols],
         from: "center",
-        amount: 0.8
+        amount: 0.4
       },
       ease: "power2.out"
     })
     .to(letterElements, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
-      stagger: 0.04,
+      duration: 0.25,
+      stagger: 0.02,
       ease: "power2.out"
-    }, "-=0.3")
+    }, "-=0.2")
     .to(dots, {
       scale: function() {
         // Random scale between 0.5 and 1.5 for a more dynamic effect
         return 0.5 + Math.random();
       },
-      duration: 1.5,
+      duration: 0.8,
       stagger: {
         grid: [rows, cols],
         from: "random",
-        amount: 0.5
+        amount: 0.3
       },
       repeat: 1,
       yoyo: true,
       ease: "sine.inOut"
-    }, "-=0.5")
+    }, "-=0.3")
     .to(dots, {
       opacity: 0,
       scale: 0,
-      duration: 0.5,
+      duration: 0.3,
       stagger: {
         grid: [rows, cols],
         from: "center",
-        amount: 0.8
+        amount: 0.4
       },
       ease: "power2.in"
-    }, "+=0.5")
+    }, "+=0.2")
     .to(letterElements, {
       opacity: 0,
       y: -20,
-      duration: 0.3,
-      stagger: 0.02,
+      duration: 0.2,
+      stagger: 0.01,
       ease: "power2.in"
-    }, "-=0.5");
+    }, "-=0.3");
     
     // Cleanup
     return () => {
