@@ -27,7 +27,7 @@ const projects = [
     id: 2,
     title: "LNHS Mobile App",
     description: "Mobile application for Lourdes National High School with QR code attendance.",
-    tags: ["React Native", "TypeScript", "Javascript", "SQL"],
+    tags: ["React Native", "TypeScript", "SQL"],
     image: "/vercel.svg", // Replace with actual project image
     link: "#",
   },
