@@ -22,6 +22,7 @@ const geistMono = Geist_Mono({
 
 // Dynamically import components to avoid hydration issues
 const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
+const FloatingBadge3D = dynamic(() => import("@/components/FloatingBadge3D"), { ssr: false });
 const About = dynamic(() => import("@/components/About"), { ssr: false });
 const Projects = dynamic(() => import("@/components/Projects"), { ssr: false });
 const Contact = dynamic(() => import("@/components/Contact"), { ssr: false });
@@ -73,6 +74,7 @@ export default function Home() {
           }`}
         >
           <CustomCursor />
+          <FloatingBadge3D position="center-left" size="large" />
           <Header />
           <main>
             <Hero />

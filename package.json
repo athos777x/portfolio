@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^10.6.1",
+    "@react-three/fiber": "^9.3.0",
+    "@react-three/rapier": "^2.1.0",
     "@types/nodemailer": "^6.4.17",
     "gsap": "^3.13.0",
+    "leva": "^0.10.0",
+    "meshline": "^3.3.1",
     "next": "15.3.4",
     "nodemailer": "^7.0.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.179.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -22,6 +28,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.179.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",

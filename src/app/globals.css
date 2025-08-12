@@ -75,3 +75,39 @@ body {
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* 3D Canvas styles */
+.badge-3d-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.badge-3d-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Ensure proper box-sizing for 3D elements */
+.badge-3d-container * {
+  box-sizing: border-box;
+}
+
+/* Floating badge styles */
+.floating-badge-3d {
+  pointer-events: auto;
+}
+
+.floating-badge-3d canvas {
+  background: transparent !important;
+}
+
+/* Ensure fullscreen 3D canvas doesn't block other interactions */
+.fullscreen-3d-canvas {
+  pointer-events: none;
+}
+
+.fullscreen-3d-canvas canvas {
+  pointer-events: auto;
+}
