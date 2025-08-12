@@ -12,12 +12,10 @@ import { useCursor } from '@/contexts/CursorContext'
 extend({ MeshLineGeometry, MeshLineMaterial })
 
 // Type declarations for meshline
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      meshLineGeometry: any
-      meshLineMaterial: any
-    }
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    meshLineGeometry: object
+    meshLineMaterial: object
   }
 }
 
@@ -39,10 +37,15 @@ interface BandProps {
 
 function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: BandProps) {
   const band = useRef<THREE.Mesh>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fixed = useRef<any>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const j1 = useRef<any>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const j2 = useRef<any>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const j3 = useRef<any>(null!)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const card = useRef<any>(null!)
   
   const vec = new THREE.Vector3()
@@ -52,14 +55,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   
   const { setCursorState } = useCursor()
   
-  const segmentProps = { 
-    type: 'dynamic' as const, 
-    canSleep: true, 
-    colliders: 'ball' as const, 
-    angularDamping: 2, 
-    linearDamping: 2 
-  }
-  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { nodes, materials } = useGLTF('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/5huRVDzcoDwnbgrKUo1Lzs/53b6dd7d6b4ffcdbd338fa60265949e1/tag.glb') as any
   const texture = useTexture('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/SOT1hmCesOHxEYxL7vkoZ/c57b29c85912047c414311723320c16b/band.jpg')
   const { width, height } = useThree((state) => state.size)
@@ -134,6 +130,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
       curve.points[2].copy(j1.current.lerped)
       curve.points[3].copy(fixed.current.translation())
       if (band.current && band.current.geometry && 'setPoints' in band.current.geometry) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (band.current.geometry as any).setPoints(curve.getPoints(64))
       }
       
@@ -175,10 +172,12 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
             position={[0, -1.2, -0.05]}
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onPointerUp={(e: any) => {
               e.target.releasePointerCapture(e.pointerId)
               drag(false)
             }}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onPointerDown={(e: any) => {
               e.target.setPointerCapture(e.pointerId)
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 // Dynamically import the Badge3D component to avoid SSR issues
@@ -19,7 +19,6 @@ interface FloatingBadge3DProps {
 
 const FloatingBadge3D = ({ 
   position = 'top-right', 
-  size = 'medium',
   debug = false,
   showOnlyInSection,
   preloadMode = false
@@ -74,22 +73,7 @@ const FloatingBadge3D = ({
     return null;
   }
 
-  // Size configurations
-  const sizeClasses = {
-    small: 'w-32 h-40',
-    medium: 'w-48 h-60',
-    large: 'w-72 h-96',
-    xl: 'w-96 h-[32rem]'
-  };
-
-  // Position configurations
-  const positionClasses = {
-    'top-right': 'top-4 right-4',
-    'top-left': 'top-4 left-4',
-    'bottom-right': 'bottom-4 right-4',
-    'bottom-left': 'bottom-4 left-4',
-    'center-right': 'top-1/2 right-4 -translate-y-1/2'
-  };
+  // Note: Size and position are handled by the Badge3D component internally
 
   return (
     <div 
