@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { useCursor } from "@/contexts/CursorContext";
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { cursorState } = useCursor();
   
   useEffect(() => {
     // Check if window is defined (client-side only)
@@ -123,6 +125,47 @@ const CustomCursor = () => {
       });
     };
   }, [isDarkMode]);
+
+  // Handle cursor state changes from 3D badge
+  useEffect(() => {
+    if (!cursorRef.current) return;
+    
+    const cursor = cursorRef.current;
+    
+    switch (cursorState) {
+      case 'hover':
+        gsap.to(cursor, {
+          scale: 1.8,
+          opacity: 0.7,
+          backgroundColor: isDarkMode ? "rgba(237, 237, 237, 0.1)" : "rgba(23, 23, 23, 0.1)",
+          borderColor: isDarkMode ? "#ededed" : "#171717",
+          borderWidth: "3px",
+          duration: 0.3,
+        });
+        break;
+      case 'grabbing':
+        gsap.to(cursor, {
+          scale: 1.3,
+          opacity: 0.9,
+          backgroundColor: isDarkMode ? "rgba(237, 237, 237, 0.3)" : "rgba(23, 23, 23, 0.3)",
+          borderColor: isDarkMode ? "#ededed" : "#171717",
+          borderWidth: "2px",
+          duration: 0.2,
+        });
+        break;
+      case 'default':
+      default:
+        gsap.to(cursor, {
+          scale: 1,
+          opacity: 1,
+          backgroundColor: "transparent",
+          borderColor: isDarkMode ? "#ededed" : "#171717",
+          borderWidth: "2px",
+          duration: 0.3,
+        });
+        break;
+    }
+  }, [cursorState, isDarkMode]);
   
   return (
     <>

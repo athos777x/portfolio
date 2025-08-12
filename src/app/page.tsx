@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { initSmoothScrolling } from "@/utils/smoothScroll";
+import { CursorProvider } from "@/contexts/CursorContext";
 
 // Font configuration
 const geistSans = Geist({
@@ -64,27 +65,34 @@ export default function Home() {
   }
 
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
-      {isLoading ? (
-        <Loader finishLoading={() => setIsLoading(false)} />
-      ) : (
-        <div 
-          className={`transition-opacity duration-700 ease-in-out ${
-            contentVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <CustomCursor />
-          <FloatingBadge3D position="center-left" size="large" />
-          <Header />
-          <main>
-            <Hero />
-            <About />
-            <Projects />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      )}
-    </div>
+    <CursorProvider>
+      <div className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
+        {/* Preload 3D Badge during loading screen (hidden) */}
+        {isLoading && (
+          <FloatingBadge3D position="center-left" size="large" preloadMode={true} />
+        )}
+        
+        {isLoading ? (
+          <Loader finishLoading={() => setIsLoading(false)} />
+        ) : (
+          <div 
+            className={`transition-opacity duration-700 ease-in-out ${
+              contentVisible ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <CustomCursor />
+            <FloatingBadge3D position="center-left" size="large" showOnlyInSection="about" />
+            <Header />
+            <main>
+              <Hero />
+              <About />
+              <Projects />
+              <Contact />
+            </main>
+            <Footer />
+          </div>
+        )}
+      </div>
+    </CursorProvider>
   );
 }

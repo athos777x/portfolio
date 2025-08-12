@@ -6,6 +6,7 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei'
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier'
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
+import { useCursor } from '@/contexts/CursorContext'
 
 // Extend the Three.js namespace to include meshline
 extend({ MeshLineGeometry, MeshLineMaterial })
@@ -49,6 +50,8 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   const rot = new THREE.Vector3()
   const dir = new THREE.Vector3()
   
+  const { setCursorState } = useCursor()
+  
   const segmentProps = { 
     type: 'dynamic' as const, 
     canSleep: true, 
@@ -91,14 +94,16 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.2])
   useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.45, 0]])
 
+  // Update cursor state for custom cursor
   useEffect(() => {
-    if (hovered) {
-      document.body.style.cursor = dragged ? 'grabbing' : 'grab'
-      return () => {
-        document.body.style.cursor = 'auto'
-      }
+    if (dragged) {
+      setCursorState('grabbing')
+    } else if (hovered) {
+      setCursorState('hover')
+    } else {
+      setCursorState('default')
     }
-  }, [hovered, dragged])
+  }, [hovered, dragged, setCursorState])
 
   useFrame((state, delta) => {
     if (dragged) {
