@@ -243,6 +243,9 @@ const Contact = () => {
               <a href="https://github.com/athos777x" className="text-foreground/70 hover:text-foreground transition-colors">
                 GitHub
               </a>
+              <a href="/files/Athrian Judd Pahang - Resume.pdf" className="text-foreground/70 hover:text-foreground transition-colors">
+                Resume
+              </a>
             </div>
           </div>
           

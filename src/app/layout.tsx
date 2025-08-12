@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio | Modern Web Developer & Designer",
+  title: "Athos Portfolio",
   description: "A minimalist portfolio showcasing web development and design projects with a focus on modern UI and user experience.",
   keywords: ["portfolio", "web developer", "designer", "frontend", "UI/UX", "React", "Next.js"],
   icons: {
