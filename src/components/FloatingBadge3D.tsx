@@ -15,13 +15,17 @@ interface FloatingBadge3DProps {
   debug?: boolean;
   showOnlyInSection?: string; // ID of the section where badge should be visible
   preloadMode?: boolean; // For preloading during loading screen
+  customImage?: string; // Path to custom ID card photo
+  customBandTexture?: string; // Path to custom band/lanyard texture
 }
 
 const FloatingBadge3D = ({ 
   position = 'top-right', 
   debug = false,
   showOnlyInSection,
-  preloadMode = false
+  preloadMode = false,
+  customImage,
+  customBandTexture
 }: FloatingBadge3DProps) => {
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(!showOnlyInSection); // Show by default if no section specified
@@ -64,7 +68,7 @@ const FloatingBadge3D = ({
   if (preloadMode) {
     return (
       <div className="fixed inset-0 z-[-10] opacity-0 pointer-events-none">
-        <Badge3D debug={debug} initialPosition={position} />
+        <Badge3D debug={debug} initialPosition={position} customImage={customImage} customBandTexture={customBandTexture} />
       </div>
     );
   }
@@ -90,7 +94,7 @@ const FloatingBadge3D = ({
         transformOrigin: 'center top'
       }}
     >
-      <Badge3D debug={debug} initialPosition={position} />
+      <Badge3D debug={debug} initialPosition={position} customImage={customImage} customBandTexture={customBandTexture} />
     </div>
   );
 };

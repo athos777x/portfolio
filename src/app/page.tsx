@@ -69,7 +69,13 @@ export default function Home() {
       <div className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
         {/* Preload 3D Badge during loading screen (hidden) */}
         {isLoading && (
-          <FloatingBadge3D position="center-left" size="large" preloadMode={true} />
+          <FloatingBadge3D 
+            position="center-left" 
+            size="large" 
+            preloadMode={true} 
+            customImage="/athos.jpg" // 👈 Your ID card photo
+            customBandTexture="/my-band.jpg" // 👈 Your custom band texture (optional)
+          />
         )}
         
         {isLoading ? (
@@ -81,7 +87,13 @@ export default function Home() {
             }`}
           >
             <CustomCursor />
-            <FloatingBadge3D position="center-left" size="large" showOnlyInSection="about" />
+            <FloatingBadge3D 
+              position="center-left" 
+              size="large" 
+              showOnlyInSection="about" 
+              customImage="/athos.jpg" // 👈 Your ID card photo
+              customBandTexture="/my-band.jpg" // 👈 Your custom band texture (optional)
+            />
             <Header />
             <main>
               <Hero />

@@ -27,15 +27,19 @@ interface Badge3DProps {
   className?: string;
   debug?: boolean;
   initialPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center-right' | 'center-left';
+  customImage?: string; // Path to custom ID card photo (e.g., '/my-photo.jpg')
+  customBandTexture?: string; // Path to custom band/lanyard texture (e.g., '/my-band.jpg')
 }
 
 interface BandProps {
   maxSpeed?: number;
   minSpeed?: number;
   initialPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center-right' | 'center-left';
+  customImage?: string; // For ID card photo
+  customBandTexture?: string; // For band/lanyard texture
 }
 
-function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: BandProps) {
+function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right', customImage, customBandTexture }: BandProps) {
   const band = useRef<THREE.Mesh>(null!)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const fixed = useRef<any>(null!)
@@ -57,7 +61,18 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { nodes, materials } = useGLTF('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/5huRVDzcoDwnbgrKUo1Lzs/53b6dd7d6b4ffcdbd338fa60265949e1/tag.glb') as any
-  const texture = useTexture('https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/SOT1hmCesOHxEYxL7vkoZ/c57b29c85912047c414311723320c16b/band.jpg')
+  
+  // Textures for band and ID card
+  const defaultBandTexture = 'https://assets.vercel.com/image/upload/contentful/image/e5382hct74si/SOT1hmCesOHxEYxL7vkoZ/c57b29c85912047c414311723320c16b/band.jpg'
+  const fallbackTexture = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChAGA60e6kgAAAABJRU5ErkJggg==' // 1x1 transparent pixel
+  
+  // Load band texture (custom or default)
+  const loadedBandTexture = useTexture(customBandTexture || defaultBandTexture)
+  const bandTexture = loadedBandTexture
+  
+  // Load ID card texture (custom or fallback to original material)
+  const loadedCardTexture = useTexture(customImage || fallbackTexture)
+  const cardTexture = customImage ? loadedCardTexture : materials.base.map
   const { width, height } = useThree((state) => state.size)
   const [curve] = useState(() => new THREE.CatmullRomCurve3([
     new THREE.Vector3(), 
@@ -142,7 +157,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   })
 
   curve.curveType = 'chordal'
-  texture.wrapS = texture.wrapT = THREE.RepeatWrapping
+  bandTexture.wrapS = bandTexture.wrapT = THREE.RepeatWrapping
 
   return (
     <>
@@ -185,7 +200,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
           >
             <mesh geometry={nodes.card.geometry}>
               <meshPhysicalMaterial 
-                map={materials.base.map} 
+                map={cardTexture} 
                 map-anisotropy={16} 
                 clearcoat={1} 
                 clearcoatRoughness={0.15} 
@@ -205,7 +220,7 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
             color: "white",
             resolution: new THREE.Vector2(width, height),
             useMap: 1,
-            map: texture,
+            map: bandTexture,
             repeat: new THREE.Vector2(-3, 1),
             lineWidth: 2,
             opacity: 0.9
@@ -217,12 +232,12 @@ function Band({ maxSpeed = 50, minSpeed = 10, initialPosition = 'top-right' }: B
   )
 }
 
-function Scene({ debug, initialPosition }: { debug: boolean, initialPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center-right' | 'center-left' }) {
+function Scene({ debug, initialPosition, customImage, customBandTexture }: { debug: boolean, initialPosition?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'center-right' | 'center-left', customImage?: string, customBandTexture?: string }) {
   return (
     <>
       <ambientLight intensity={Math.PI} />
       <Physics debug={debug} interpolate gravity={[0, -40, 0]} timeStep={1 / 120}>
-        <Band initialPosition={initialPosition} />
+        <Band initialPosition={initialPosition} customImage={customImage} customBandTexture={customBandTexture} />
       </Physics>
       <Environment background={false} blur={0.75}>
         <Lightformer 
@@ -233,7 +248,7 @@ function Scene({ debug, initialPosition }: { debug: boolean, initialPosition?: '
           scale={[100, 0.1, 1]} 
         />
         <Lightformer 
-          intensity={3} 
+          intensity={0} 
           color="white" 
           position={[-1, -1, 1]} 
           rotation={[0, 0, Math.PI / 3]} 
@@ -247,7 +262,7 @@ function Scene({ debug, initialPosition }: { debug: boolean, initialPosition?: '
           scale={[100, 0.1, 1]} 
         />
         <Lightformer 
-          intensity={10} 
+          intensity={3} 
           color="white" 
           position={[-10, 0, 14]} 
           rotation={[0, Math.PI / 2, Math.PI / 3]} 
@@ -266,7 +281,7 @@ function LoadingFallback() {
   )
 }
 
-export default function Badge3D({ className = "", debug = false, initialPosition = 'top-right' }: Badge3DProps) {
+export default function Badge3D({ className = "", debug = false, initialPosition = 'top-right', customImage, customBandTexture }: Badge3DProps) {
   return (
     <div className={`w-full h-full ${className}`} style={{ pointerEvents: 'auto' }}>
       <Suspense fallback={<LoadingFallback />}>
@@ -275,7 +290,7 @@ export default function Badge3D({ className = "", debug = false, initialPosition
           style={{ background: 'transparent' }}
           gl={{ alpha: true }}
         >
-          <Scene debug={debug} initialPosition={initialPosition} />
+          <Scene debug={debug} initialPosition={initialPosition} customImage={customImage} customBandTexture={customBandTexture} />
         </Canvas>
       </Suspense>
     </div>
